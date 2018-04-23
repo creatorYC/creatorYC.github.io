@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Yech.site</title>
+  <title>Tag: 梯度上升算法 | Yech.site</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Yech - 一起">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Yech.site">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/梯度上升算法/index.html">
 <meta property="og:site_name" content="Yech.site">
 <meta property="og:description" content="Yech - 一起">
 <meta property="og:locale" content="zh-Hans">
@@ -165,46 +165,34 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-logistic-regression" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/04/23/logistic-regression/" class="archive-article-date">
+  	<time datetime="2018-04-23T05:49:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-23</time>
+</a>
+        </div>
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/23/logistic-regression/">Logistic 回归与梯度上升算法</a>
+      <a class="archive-article-title" href="/2018/04/23/logistic-regression/">Logistic 回归与梯度上升算法</a>
     </h1>
   
 
-        
-        <a href="/2018/04/23/logistic-regression/" class="archive-article-date">
-  	<time datetime="2018-04-23T05:49:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>最近在看《机器学习实战》，这本书将所有的算法都用 Python 代码实现了，非常具有实战性，但对于算法原理的讲解则比较粗略，也没有详细的数学推导过程，所以很多哪怕几行简单的代码，也得找资料理解好久。</p>
-<h3 id="Logistic-回归与梯度上升算法"><a href="#Logistic-回归与梯度上升算法" class="headerlink" title="Logistic 回归与梯度上升算法"></a>Logistic 回归与梯度上升算法</h3><p><strong><em>Logistic 回归</em></strong></p>
-<p>Logistic 回归用于二分类问题，根据现有数据对分类边界线建立回归公式，并以此进行分类。Logistic 回归本质上是一个基于条件概率的判别模型，利用了 Sigmoid 函数值域在(0, 1)之间的特性。Sigmoid 函数的计算公式为：<br>$$ g(z)=\frac{1}{1+e^{-z}} $$<br>通过 Sigmid 函数计算出结果，若结果大于0.5，则为类别1，反之属于类别0。由于数据有多个特征，因此函数的输入用向量表示如下：<br>$$ \theta_0+\theta_1x_1+\cdots+\theta_nx_n=\sum_{i=0}^{n} {\theta_ix_i}=\theta^Tx $$<br>则函数计算公式变为：<br>$$ h_\theta(x)=g(\theta^Tx)=\frac{1}{1+e^{-\theta^Tx}} $$<br>如果我们求出了合适的参数向量 $\theta$，以及样本x，那么就可以根据上述公式，计算出概率值，从而判断x所属的分类。</p>
-<p><strong>那么如何求出合适的参数向量$\theta$呢？</strong></p>
-<p>上述 $h_\theta(x)$ 函数具有特殊含义，它表示结果取1的概率，因此对于输入的x分类结果为类别1和类别0的概率为：<br>$$ P(y=1|x;\theta)=h_\theta(x) $$<br>$$ P(y=0|x;\theta)=1-h_\theta(x) $$<br>将两个公式合并为一个即为：<br>$$ P(y|x;\theta)=(h_\theta(x))^y(1-h_\theta(x))^{1-y} $$<br>取最大似然函数为：<br>$$ L(\theta)=\prod_{i=1}^m p(y^{(i)}|x^{(i)};\theta)=\prod_{i=1}^m (h_\theta(x^{(i)}))^{y^{(i)}}(1-h_\theta(x^{(i)}))^{1-y^{(i)}} $$<br>其中，m为样本总数，$x^{(i)}$为第i个样本,$y^{(i)}$为第i个样本的类别。对最大似然函数取对数为：<br>$$ l(\theta)=log L(\theta)=\sum_{i=1}^m y^{(i)}log h_\theta(x^{(i)})+(1-y^{(i)})log(1-h_\theta(x^{(i)})) $$<br>其中，<strong>满足使$l(\theta)$值最大的$\theta$值，即为所求的参数值。</strong></p>
-<p><strong><em>梯度上升算法</em></strong></p>
-<p>现在如何求满足使$l(\theta)$值最大的$\theta$值呢？这就需要用到梯度上升算法。</p>
-<p>根据梯度上升算法可得$\theta$的更新过程：<br>$$ \theta_j=\theta_j+\alpha \frac{\partial{l(\theta)}}{\partial{\theta_j}} $$<br>其中， $\alpha$为步长。<br>$$ \begin{align<em>}<br>\frac{\partial{l(\theta)}}{\partial{\theta_j}}&amp;=\sum_{i=1}^m \left(y^{(i)}\frac{1}{g(\theta^T x^{(i)})}-(1-y^{(i)})\frac{1}{1-g(\theta^T x^{(i)})} \right) \frac{\partial{g(\theta^T x^{(i)})}}{\partial{\theta_j}} \<br>&amp;=\sum_{i=1}^m \left( y^{(i)}\frac{1}{g(\theta^T x^{(i)})}-(1-y^{(i)})\frac{1}{1-g(\theta^T x^{(i)})} \right) g(\theta^T x^{(i)})\left(1-g(\theta^T x^{(i)}) \right) \frac{\partial{\theta^T x^{(i)}}}{\partial{\theta_j}} \<br>&amp;= \sum_{i=1}^m \left( y^{(i)}(1-g(\theta^T x^{(i)}))-(1-y^{(i)})g(\theta^T x^{(i)}) \right)x^{(i)}<em>j \<br>&amp;= \sum</em>{i=1}^m \left( y^{(i)}-g(\theta^T x^{(i)}) \right)x^{(i)}<em>j \<br>&amp;= \sum</em>{i=1}^m \left( y^{(i)}-h_\theta (x^{(i)}) \right)x^{(i)}_j \end{align</em>} $$<br>上述公式求解过程中用到如下换算公式：<br>$$ f(x)=\frac{1}{1+e^{g(x)}} $$<br>$$ \begin{align<em>}<br>\frac{\partial{f(x)}}{x}&amp;=\frac{1}{\left(   1+e^{g(x)} \right)^2}e^{g(x)}\frac{\partial{g(x)}}{\partial{x}} \<br>&amp;= \frac{1}{1+e^{g(x)}} \frac{e^{g(x)}}{1+e^{g(x)}} \frac{\partial{g(x)}}{\partial{x}} \<br>&amp;= f(x)\left(1-f(x)\right) \frac{\partial{g(x)}}{\partial{x}} \end{align</em>}$$<br>$$ \frac{\partial{\theta^T x}}{\partial{\theta_j}}=\frac{\partial{(\theta_1 x_1+\cdots+\theta_n x_n)}}{\partial{\theta_j}}=x_j $$<br>因此，$\theta$的更新过程为：<br>$$ \theta_j=\theta_j+\alpha \sum_{i=1}^m \left( y^{(i)}-h_\theta(x^{(i)}) \right) x^{(i)}_j $$</p>
-<p><strong><em>梯度上升过程的向量化</em></strong></p>
-<p>训练数据的矩阵形式如下，x的每一行为一个训练样本，每一列为不同的特征值。<br>$$ x=\left[<br>    \begin{matrix}<br>        x^{(1)} \<br>        x^{(2)} \<br>        \vdots \<br>        x^{(m)}<br>    \end{matrix} \right]=<br>     \left[<br>    \begin{matrix}<br>    x_0^{(1)} &amp; x_1^{(1)} &amp; \cdots &amp; x_n^{(1)} \<br>    x_0^{(2)} &amp; x_1^{(2)} &amp; \cdots &amp; x_n^{(2)} \<br>    \vdots &amp; \vdots &amp; \vdots &amp; \vdots \<br>    x_0^{(m)} &amp; x_1^{(m)} &amp; \cdots &amp; x_n^{(m)} \<br>    \end{matrix} \right],<br>    y=\left[<br>    \begin{matrix}<br>        y^{(1)} \<br>        y^{(2)} \<br>        \vdots \<br>        y^{(m)}<br>    \end{matrix} \right]<br>$$<br>参数向量$\theta$的矩阵形式为：<br>$$<br>    \theta=\left[<br>    \begin{matrix}<br>        \theta_0 \<br>        \theta_1 \<br>        \vdots \<br>        \theta_n<br>    \end{matrix} \right]<br>$$<br>先求 $x\cdot\theta$并记结果为A:<br>$$<br>    A=x\cdot\theta=\left[<br>    \begin{matrix}<br>    x_0^{(1)} &amp; x_1^{(1)} &amp; \cdots &amp; x_n^{(1)} \<br>    x_0^{(2)} &amp; x_1^{(2)} &amp; \cdots &amp; x_n^{(2)} \<br>    \vdots &amp; \vdots &amp; \vdots &amp; \vdots \<br>    x_0^{(m)} &amp; x_1^{(m)} &amp; \cdots &amp; x_n^{(m)} \<br>    \end{matrix} \right] \cdot<br>    \left[<br>    \begin{matrix}<br>        \theta_0 \<br>        \theta_1 \<br>        \vdots \<br>        \theta_n<br>    \end{matrix} \right]=<br>    \left[<br>    \begin{matrix}<br>        \theta_0 x_0^{(1)}+\theta_1 x_1^{(1)}+\cdots+\theta_n x_n^{(1)} \<br>        \theta_0 x_0^{(2)}+\theta_1 x_1^{(2)}+\cdots+\theta_n x_n^{(2)} \<br>        \vdots \<br>        \theta_0 x_0^{(m)}+\theta_1 x_1^{(m)}+\cdots+\theta_n x_n^{(m)} \<br>    \end{matrix} \right]<br>$$<br>再求 $y-h_\theta(x)$ 并记结果为E:<br>$$<br>E=y-h_\theta(x)=<br>\left[<br>    \begin{matrix}<br>        g\left( A^{(1)} \right)-y^{(1)} \<br>        g\left( A^{(2)} \right)-y^{(2)} \<br>        \vdots \<br>        g\left( A^{(m)} \right)-y^{(m)}<br>    \end{matrix} \right]=<br>    \left[<br>    \begin{matrix}<br>        e^{(1)} \<br>        e^{(2)} \<br>        \vdots \<br>        e^{(m)}<br>    \end{matrix} \right]=<br>    g(A)-y<br>$$<br>由以上式子可知，$y-h_\theta(x)$ 可由 $g(A)-y$ 一次求得，带入 $\theta$ 的更新过程可得：<br>$$<br>\begin{align<em>}<br>\theta_j&amp;=\theta_j+\alpha \sum_{i=1}^m \left( y^{(i)}-h_\theta(x^{(i)}) \right)x_j^{(i)} \<br>&amp;= \theta_j+\alpha \sum_{i=1}^m e^{(i)} x^{(i)} \<br>&amp;= \theta_j+\alpha \left( x_j^{(1)},x_j^{(2)}, \cdots,x_j^{(m)} \right) \cdot E<br>\end{align</em>}<br>$$<br>综合起来就是：<br>$$<br>\left[<br>    \begin{matrix}<br>        \theta_0 \<br>        \theta_1 \<br>        \vdots \<br>        \theta_n \<br>    \end{matrix} \right]=<br>    \left[<br>    \begin{matrix}<br>        \theta_0 \<br>        \theta_1 \<br>        \vdots \<br>        \theta_n \<br>    \end{matrix} \right]+\alpha \cdot<br>    \left[<br>    \begin{matrix}<br>        x_0^{(1)}&amp;,x_0^{(2)}&amp;,\cdots&amp;,x_0^{(m)} \<br>        x_1^{(1)}&amp;,x_1^{(2)}&amp;,\cdots&amp;,x_1^{(m)} \<br>        \vdots&amp;\vdots&amp;\vdots&amp;\vdots \<br>        x_n^{(1)}&amp;,x_n^{(2)}&amp;,\cdots&amp;,x_n^{(m)}<br>    \end{matrix} \right] \cdot E = \theta+\alpha \cdot x^T \cdot E<br>$$</p>
-<p><strong><em>Python代码如下:</em></strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 阶跃函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(inX)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1.0</span> / (<span class="number">1</span> + exp(-inX))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用梯度上升算法计算最佳回归系数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradientAscent</span><span class="params">(dataMatIn, classLabels)</span>:</span></span><br><span class="line">    <span class="comment"># 转换为Numpy矩阵类型</span></span><br><span class="line">    dataMatrix = mat(dataMatIn)</span><br><span class="line">    labelMat = mat(classLabels).T   <span class="comment"># 矩阵转置</span></span><br><span class="line">    m, n = shape(dataMatrix)</span><br><span class="line">    alpha = <span class="number">0.001</span>   <span class="comment"># 向目标移动的步长</span></span><br><span class="line">    numCycles = <span class="number">500</span> <span class="comment"># 迭代次数</span></span><br><span class="line">    weights = ones((n, <span class="number">1</span>))</span><br><span class="line">    <span class="comment"># 计算真实类别与预测类别的差值, 按照该差值的方向调整回归系数</span></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(numCycles):</span><br><span class="line">        h = sigmoid(dataMatrix * weights)   <span class="comment"># 矩阵相乘</span></span><br><span class="line">        error = (labelMat - h)  <span class="comment"># 向量相减</span></span><br><span class="line">        weights = weights + alpha * dataMatrix.T * error</span><br><span class="line">    <span class="keyword">return</span> weights</span><br></pre></td></tr></table></figure></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>《机器学习实战》中短短数十行代码中隐藏了太多的细节，如果不是查阅很多资料，对于初学者来说真的很难弄懂，以上过程还只是最简单的Logistic回归，书上还提供了随机Logistic回归和优化后的随机Logistic回归，看得也是云里雾里 -_-!</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -220,7 +208,7 @@
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -233,39 +221,17 @@
 	</div>
 
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/23/logistic-regression/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
+    </div></section>
+  
+
+    
 
 
           </div>
@@ -287,10 +253,10 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
