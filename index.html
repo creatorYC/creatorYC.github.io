@@ -185,49 +185,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>SVM — 支持向量机，它是一个二类分类器。在样本数据中，找出一个分割超平面(因为数据集有很多特征，所以是多维的，因此是个分割面)，分布在分割超平面两侧的数据属于不同的类别。为了找出最佳的分割超平面，需要满足一些条件，即<strong>离分割超平面距离最近的点的间隔尽可能大</strong>。而离分割超平面最近的那些点，就被称为<strong>支持向量</strong>。现在的目标就是求解这个最佳的分割超平面。</p>
-<h3 id="函数间隔与几何间隔"><a href="#函数间隔与几何间隔" class="headerlink" title="函数间隔与几何间隔"></a>函数间隔与几何间隔</h3><p>分割超平面的方程可以写为：$ \omega^Tx+b=0 $，在分割面的方程确定后，$|\omega^Tx+b|$ 能相对地表示$x$距离超平面的远近，并且，可以通过判断$\omega^Tx+b$的符号与类标记$y$的符号是否一致来表示分类是否正确($y$为1对应$\omega^Tx+b&gt;0$，$y$为-1对应$\omega^Tx+b&lt;0$),所以可以用$y(\omega^Tx+b)$来表示分类的正确性以及某种意义下的距离超平面的距离。这就是所谓的<strong>“函数间隔”</strong>(这个结果可以保证间隔的值为非负)。但是这样定义的函数间隔有问题，比如说，将$b$和$\omega$成比例的扩大$k$倍，其超平面$k\omega+kb=0$跟之前的超平面是一样的，但是间隔$y(k\omega+kb)$却较之前扩大了$k$倍。因此需要对法向量$\omega$规范化，从而定义<strong>“几何间隔”</strong>：</p>
-<script type="math/tex; mode=display">\gamma = \frac{ y(\omega^Tx+b) }{||\omega||}</script><h3 id="最大间隔分类器"><a href="#最大间隔分类器" class="headerlink" title="最大间隔分类器"></a>最大间隔分类器</h3><p>对于一个数据点进行分类时，离分割面的距离越大越可信。对于一个包含n个点的数据集，间隔为n个点中最小的那个，为了使得分类的可信度高，我们选择的超平面应该最大化这个间隔。因此我们的目标函数为：</p>
-<script type="math/tex; mode=display">\max\ \gamma</script><p>需要满足的限制条件为：</p>
-<script type="math/tex; mode=display">y_i (\omega^T x_i+b) = \gamma_i \geq \gamma , i=1,\cdots,n</script><p>为了方便推导，令函数间隔$ y(\omega^Tx+b) = 1$，因此，目标函数为：</p>
-<script type="math/tex; mode=display">\max\ \frac{1}{||\omega||} , s.t. \ y_i (\omega^T x_i+b) \geq 1</script><p>这个问题等价于（为了方便求解，加上了平方，还有一个系数）：</p>
-<script type="math/tex; mode=display">\min\ \frac{1}{2} ||\omega||^2 , s.t. \ y_i (\omega^T x_i+b) \geq 1</script><p>这是一个二次优化问题——目标函数是二次的，约束条件是线性的，这个优化问题可以用拉格朗日乘数法求解(大学学的数学还真的很有用，哈哈~)，因此，最终的函数形式为：</p>
-<script type="math/tex; mode=display">L(\omega, b, \alpha) = \frac{1}{2} ||\omega||^2 - \sum_{i=1}^n \alpha_i (y_i(\omega^Tx_i+b)-1)</script><p>然后我们令：</p>
-<script type="math/tex; mode=display">\theta(\omega) = \max \limits_{\alpha_i \geq 0} L(\omega, b, \alpha)</script><p>容易验证，当某个约束条件不满足时，例如 $ y_i(\omega^Tx_i+b) \le 1 $，那么我们显然有 $ \theta(\omega) = \infty $，而当所有约束条件都满足时，则有 $ \theta(\omega) = \frac{1}{2} ||\omega||^2 $ ，即我们最初要最小化的量。因此，在要求约束条件得到满足的情况下最小化 $\frac{1}{2} ||\omega||^2$ 实际上等价于直接最小化$\theta(\omega)$。现在，目标函数变成了：</p>
-<script type="math/tex; mode=display">\min \limits_{\omega, b} \theta(\omega) = \min \limits_{\omega, b} \max \limits_{\alpha_i \geq 0}L(\omega, b, \alpha) = p^*</script><p>这里用 $p^*$ 表示这个问题的最优值，这个问题和我们最初的问题是等价的。现在把最小和最大的位置交换一下：</p>
-<script type="math/tex; mode=display">\max \limits_{\alpha_i \geq 0} \min \limits_{\omega, b} L(\omega, b, \alpha) = d^*</script><p>交换以后的问题不再等价于原问题，这个新问题的最优值用 $d^<em> $来表示。并且有 $d^</em> \leq p^<em> $，(这在直观上也不难理解，最大值中最小的一个总也比最小值中最大的一个要大吧！) 总之，第二个问题的最优值 $d^</em> $在这里提供了一个第一个问题的最优值 $p^* $的一个下界，在满足某些条件的情况下，这两者相等，这个时候我们就可以通过求解第二个问题来间接地求解第一个问题。<br>现在来求解这个问题。先让 $L$ 最小化，直接让$L$对$\omega$和$b$求导，</p>
-<script type="math/tex; mode=display">\frac{\partial L}{\partial \omega} = \omega - \sum_{i=1}^n \alpha_i y_i x_i = 0 \Rightarrow \omega = \sum_{i=1}^n \alpha_i y_i x_i</script><script type="math/tex; mode=display">\frac{\partial L}{\partial b} = - \sum_{i=1}^n \alpha_i y_i = 0 \Rightarrow \sum_{i=1}^n \alpha_i y_i = 0</script><p>带回 $L$ 得到：</p>
-<script type="math/tex; mode=display">\begin{align*} 
-L(\omega, b, \alpha) &= \frac{1}{2} \sum_{i,j=1}^n \alpha_i \alpha_j y_i y_j x_i^T x_j - \sum_{i,j=1}^n \alpha_i \alpha_j y_i y_j x_i^T x_j - b \sum_{i=1}^n \alpha_i y_i + \sum_{i=1}^n \alpha_i \\
-&= \sum_{i=1}^n \alpha_i - \frac{1}{2} \sum_{i,j=1}^n \alpha_i \alpha_j y_i y_j x_i^T x_j 
-\end{align*}</script><p>此时得到关于 $\alpha$ 的优化问题：</p>
-<script type="math/tex; mode=display">\max \limits_{\alpha} \sum_{i=1}^n \alpha_i - \frac{1}{2} \sum_{i,j=1}^n \alpha_i \alpha_j y_i y_j x_i^T x_j</script><script type="math/tex; mode=display">s.t. \alpha_i \geq 0, i=1,\cdots, n , \sum_{i=1}^n \alpha_i y_i = 0</script><p>我们对一个数据点$x$进行分类的时候，实际上是通过将$x$代入到 $f(x)=\omega^Tx+b$，根据结果的正负来判断$x$所属的分类，而 $\omega = \sum_{i=1}^n \alpha_i y_i x_i$，因此：</p>
-<script type="math/tex; mode=display">f(X) = (\sum_{i=1}^n \alpha_i y_i x_i)^T x + b = \sum_{i=1}^n \alpha_i y_i \langle x_i, x \rangle + b</script><p>这里有趣之处在于，对于新点$x$的预测，只需要计算它与训练数据点的内积即可。另外，所谓的<em>支持向量</em>也在这里显示出来—事实上，所有的非支持向量所对应的系数$\alpha$都为0，因此对于新点的内积计算实际上只要针对少量的“支持向量”而不是所有的训练数据即可。<br>为什么非支持向量对应的$\alpha$等于零呢？之前的目标函数为：</p>
-<script type="math/tex; mode=display">\max \limits_{\alpha_i \geq 0} L(\omega, b, \alpha) = \max \limits_{\alpha_i \geq 0} \frac{1}{2} ||\omega||^2 - \sum_{i=1}^n \alpha_i (y_i(\omega^Tx_i+b)-1)</script><p>注意到如果$x_i$是支持向量的话，上式中$(y_i(\omega^Tx_i+b)-1)$部分是等于 0 的（因为支持向量的函数间隔等于 1 ），而对于非支持向量来说，函数间隔会大于 1 ，因此$(y_i(\omega^Tx_i+b)-1)$是大于零的，而$\alpha_i$又是非负的，为了满足最大化，$\alpha_i$必须等于 0 。</p>
-<h3 id="Kernel"><a href="#Kernel" class="headerlink" title="Kernel"></a>Kernel</h3><p>前面介绍了线性情况下的支持向量机，它通过寻找一个线性的超平面来达到对数据进行分类的目的。但是大部分数据集都是线性不可分的，因此，对于非线性的情况，SVM 的处理方法是选择一个核函数 κ(⋅,⋅) ，通过将数据映射到高维空间，来解决在原始空间中线性不可分的问题。<br>前面我们得到的分类函数为：</p>
-<script type="math/tex; mode=display">f(x) = \sum_{i=1}^n \alpha_i y_i \langle x_i, x \rangle + b</script><p>现在则为映射后的空间，即：</p>
-<script type="math/tex; mode=display">f(x) = \sum_{i=1}^n \alpha_i y_i \langle \phi(x_i), \phi(x) \rangle + b</script><p>因此，建立非线性学习器分为两步：</p>
-<ul>
-<li>首先使用一个非线性映射将数据变换到一个特征空间</li>
-<li>然后在特征空间使用线性学习器分类。</li>
-</ul>
-<p>因为直接将低维空间映射到高维空间的函数$\phi(x)$可能很难计算，因此如果有一种方式可以在特征空间中直接计算内积 $\langle \phi(x_i), \phi(x) \rangle$，就像在原始输入点的函数中一样，就有可能将两个步骤融合到一起建立一个非线性的学习器，这样直接计算法的方法称为核函数方法：</p>
-<script type="math/tex; mode=display">K(x, z) = \langle \phi(x), \phi(z) \rangle</script><p>核函数能简化映射空间中的内积运算。现在，分类函数为：</p>
-<script type="math/tex; mode=display">\sum_{i=1}^n \alpha_i y_i K(x,x_i) + b</script><p>其中 $\alpha$ 由如下问题计算而得：</p>
-<script type="math/tex; mode=display">\max \limits_{\alpha} \sum_{i=1}^n \alpha_i - \frac{1}{2} \sum_{i,j=1}^n \alpha_i \alpha_j y_i y_j K(x_i, x_j)</script><script type="math/tex; mode=display">s.t. \alpha_i \geq 0, i=1,\cdots, n , \sum_{i=1}^n \alpha_i y_i = 0</script><p>这样一来计算的问题就算解决了，避开了直接在高维空间中进行计算。<br><strong>核函数的作用就是隐含着一个从低维空间到高维空间的映射，而这个映射可以把低维空间中线性不可分的两类点变成线性可分的</strong>。<br>对于任意一个映射，构造出合适的核函数很困难，因此通常人们会从一些常用的核函数中选择，如：</p>
-<ul>
-<li>高斯核函数：<script type="math/tex">K(x1, x2) = exp \left( -\frac{||x1-x2||^2}{2\sigma^2} \right)</script><br>这是一个采用 <em>向量</em> 作为自变量的函数，能够基于向量距离运算输出一个标量，其中，$\sigma$ 是用户定义的用于确定<strong>到达率</strong>或者函数值跌落到0的速度参数，<em>高斯核函数将数据从其特征空间映射到无穷维空间</em>。</li>
-</ul>
-<h3 id="Outliers"><a href="#Outliers" class="headerlink" title="Outliers"></a>Outliers</h3><p>如果不是因为数据本身是非线性结构的，而只是因为数据有噪音，对于这种偏离正常位置很远的数据点(outlier) ，在我们原来的 SVM 模型里，可能造成很大的影响。为了处理这种情况，SVM 允许数据点在一定程度上偏离一下超平面。具体来说，原来的约束条件为：</p>
-<script type="math/tex; mode=display">y_i(\omega^T x_i+b) \geq 1, i=1,\cdots,n</script><p>现在变为：</p>
-<script type="math/tex; mode=display">y_i(\omega^T x_i+b) \geq 1-\xi_i, i=1,\cdots,n</script><p>其中 $\xi_i \geq 0$ 称为松弛变量(slack variable)，对应数据点$x_i$允许偏离的函数间隔的量。当然，如果我们任由 $\xi_i$任意大的话，那任意的超平面都是符合条件的了。所以，我们在原来的目标函数后面加上一项，使得这些 $\xi_i$的总和也要最小：</p>
-<script type="math/tex; mode=display">\min \frac{1}{2} ||\omega^2|| + C\sum_{i=1}^n \xi_i</script><p>其中$C$是一个参数，用于控制目标函数中两项（<strong>“寻找间隔最大的超平面”</strong>和<strong>“保证数据点偏差量最小”</strong>）之间的权重。注意，其中$\xi_i$是需要优化的变量，而$C$是一个事先确定好的常量。完整地写出来为：</p>
-<script type="math/tex; mode=display">\min \frac{1}{2} ||\omega^2|| + C\sum_{i=1}^n \xi_i</script><script type="math/tex; mode=display">s.t. y_i(\omega^T x_i+b) \geq 1-\xi_i, i=1,\cdots,n</script><script type="math/tex; mode=display">\xi_i \geq 0, i=1,\cdots,n</script><p>用之前的方法将限制加入到目标函数中，为：</p>
-<script type="math/tex; mode=display">L(\omega, b, \alpha) = \frac{1}{2} ||\omega||^2 + C\sum_{i=1}^n \xi_i - \sum_{i=1}^n \alpha_i (y_i(\omega^Tx_i+b)-1+\xi_i) - \sum_{i=1}^n \gamma_i \xi_i</script><p>像前面一样，先求导：</p>
-<script type="math/tex; mode=display">\frac{\partial L}{\partial \omega}=0 \Rightarrow \omega=\sum_{i=1}^n \alpha_i y_i x_i</script><script type="math/tex; mode=display">\frac{\partial L}{\partial b} = 0 \Rightarrow \sum_{i=1}^n \alpha_i y_i = 0</script><script type="math/tex; mode=display">\frac{\partial L}{\partial \xi_i}=0 \Rightarrow C-\alpha_i-\gamma_i=0, i=1,\cdots,n</script><p>将 $\omega$带回$L$并化简可得到与之前一样的目标函数：</p>
-<script type="math/tex; mode=display">\max \limits_{\alpha} \sum_{i=1}^n \alpha_i - \frac{1}{2} \sum_{i,j=1}^n \alpha_i \alpha_j y_i y_j \langle x_i, x_j \rangle</script><p>不过，因为有 $ C-\alpha_i-\gamma_i=0 $ 和 $ \gamma_i \geq 0 $，因此有 $ C \geq \alpha_i \geq 0 $，所以最终问题写为：</p>
-<script type="math/tex; mode=display">\max \limits_{\alpha} \sum_{i=1}^n \alpha_i - \frac{1}{2} \sum_{i,j=1}^n \alpha_i \alpha_j y_i y_j \langle x_i, x_j \rangle</script><script type="math/tex; mode=display">s.t. 0 \leq \alpha_i \leq C, i=1,\cdots,n</script><script type="math/tex; mode=display">\sum_{i=1}^n \alpha_i y_i = 0</script><p>这与之前问题的唯一区别就是$\alpha$多了一个上限$C$。现在，一个完整的、可以处理线性和非线性并能容忍噪音和 outliers 的支持向量机终于介绍完毕了。</p>
-
+        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>SVM — 支持向量机，它是一个二类分类器。在样本数据中，找出一个分割超平面(因为数据集有很多特征，所以是多维的，因此是个分割面)，分布在分割超平面两侧的数据属于不同的类别。为了找出最佳的分割超平面，需要满足一些条件，即<strong>离分割超平面距离最近的点的间隔尽可能大</strong>。而离分割超平面最近的那些点，就被称为<strong>支持向量</strong>。现在的目标就是求解这个最佳的分割超平面。<br>
+        
+          <a class="article-more-a" href="/2018/04/28/SVM/#more">more >></a>
+        
       
 
       
@@ -315,132 +276,10 @@ L(\omega, b, \alpha) &= \frac{1}{2} \sum_{i,j=1}^n \alpha_i \alpha_j y_i y_j x_i
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>最近在看《机器学习实战》，这本书将所有的算法都用 Python 代码实现了，非常具有实战性，但对于算法原理的讲解则比较粗略，也没有详细的数学推导过程，所以很多哪怕几行简单的代码，也得找资料理解好久。</p>
-<h3 id="Logistic-回归与梯度上升算法"><a href="#Logistic-回归与梯度上升算法" class="headerlink" title="Logistic 回归与梯度上升算法"></a>Logistic 回归与梯度上升算法</h3><p><strong><em>Logistic 回归</em></strong></p>
-<p>Logistic 回归用于二分类问题，根据现有数据对分类边界线建立回归公式，并以此进行分类。Logistic 回归本质上是一个基于条件概率的判别模型，利用了 Sigmoid 函数值域在(0, 1)之间的特性。Sigmoid 函数的计算公式为：</p>
-<script type="math/tex; mode=display">g(z)=\frac{1}{1+e^{-z}}</script><p>通过 Sigmid 函数计算出结果，若结果大于0.5，则为类别1，反之属于类别0。由于数据有多个特征，因此函数的输入用向量表示如下：</p>
-<script type="math/tex; mode=display">\theta_0+\theta_1x_1+\cdots+\theta_nx_n=\sum_{i=0}^{n} {\theta_ix_i}=\theta^Tx</script><p>则函数计算公式变为：</p>
-<script type="math/tex; mode=display">h_\theta(x)=g(\theta^Tx)=\frac{1}{1+e^{-\theta^Tx}}</script><p>如果我们求出了合适的参数向量 $\theta$，以及样本x，那么就可以根据上述公式，计算出概率值，从而判断x所属的分类。</p>
-<p><strong>那么如何求出合适的参数向量$\theta$呢？</strong></p>
-<p>上述 $h_\theta(x)$ 函数具有特殊含义，它表示结果取1的概率，因此对于输入的x分类结果为类别1和类别0的概率为：</p>
-<script type="math/tex; mode=display">P(y=1|x;\theta)=h_\theta(x)</script><script type="math/tex; mode=display">P(y=0|x;\theta)=1-h_\theta(x)</script><p>将两个公式合并为一个即为：</p>
-<script type="math/tex; mode=display">P(y|x;\theta)=(h_\theta(x))^y(1-h_\theta(x))^{1-y}</script><p>取最大似然函数为：</p>
-<script type="math/tex; mode=display">L(\theta)=\prod_{i=1}^m p(y^{(i)}|x^{(i)};\theta)=\prod_{i=1}^m (h_\theta(x^{(i)}))^{y^{(i)}}(1-h_\theta(x^{(i)}))^{1-y^{(i)}}</script><p>其中，m为样本总数，$x^{(i)}$为第i个样本,$y^{(i)}$为第i个样本的类别。对最大似然函数取对数为：</p>
-<script type="math/tex; mode=display">l(\theta)=log L(\theta)=\sum_{i=1}^m y^{(i)}log h_\theta(x^{(i)})+(1-y^{(i)})log(1-h_\theta(x^{(i)}))</script><p>其中，<strong>满足使$l(\theta)$值最大的$\theta$值，即为所求的参数值。</strong></p>
-<p><strong><em>梯度上升算法</em></strong></p>
-<p>现在如何求满足使$l(\theta)$值最大的$\theta$值呢？这就需要用到梯度上升算法。</p>
-<p>根据梯度上升算法可得$\theta$的更新过程：</p>
-<script type="math/tex; mode=display">\theta_j=\theta_j+\alpha \frac{\partial{l(\theta)}}{\partial{\theta_j}}</script><p>其中， $\alpha$为步长。</p>
-<script type="math/tex; mode=display">\begin{align*} 
-\frac{\partial{l(\theta)}}{\partial{\theta_j}}&=\sum_{i=1}^m \left(y^{(i)}\frac{1}{g(\theta^T x^{(i)})}-(1-y^{(i)})\frac{1}{1-g(\theta^T x^{(i)})} \right) \frac{\partial{g(\theta^T x^{(i)})}}{\partial{\theta_j}} \\
-&=\sum_{i=1}^m \left( y^{(i)}\frac{1}{g(\theta^T x^{(i)})}-(1-y^{(i)})\frac{1}{1-g(\theta^T x^{(i)})} \right) g(\theta^T x^{(i)})\left(1-g(\theta^T x^{(i)}) \right) \frac{\partial{\theta^T x^{(i)}}}{\partial{\theta_j}} \\
-&= \sum_{i=1}^m \left( y^{(i)}(1-g(\theta^T x^{(i)}))-(1-y^{(i)})g(\theta^T x^{(i)}) \right)x^{(i)}_j \\
-&= \sum_{i=1}^m \left( y^{(i)}-g(\theta^T x^{(i)}) \right)x^{(i)}_j \\
-&= \sum_{i=1}^m \left( y^{(i)}-h_\theta (x^{(i)}) \right)x^{(i)}_j \end{align*}</script><p>上述公式求解过程中用到如下换算公式：</p>
-<script type="math/tex; mode=display">f(x)=\frac{1}{1+e^{g(x)}}</script><script type="math/tex; mode=display">\begin{align*} 
-\frac{\partial{f(x)}}{x}&=\frac{1}{\left(   1+e^{g(x)} \right)^2}e^{g(x)}\frac{\partial{g(x)}}{\partial{x}} \\
-&= \frac{1}{1+e^{g(x)}} \frac{e^{g(x)}}{1+e^{g(x)}} \frac{\partial{g(x)}}{\partial{x}} \\ 
-&= f(x)\left(1-f(x)\right) \frac{\partial{g(x)}}{\partial{x}} \end{align*}</script><script type="math/tex; mode=display">\frac{\partial{\theta^T x}}{\partial{\theta_j}}=\frac{\partial{(\theta_1 x_1+\cdots+\theta_n x_n)}}{\partial{\theta_j}}=x_j</script><p>因此，$\theta$的更新过程为：</p>
-<script type="math/tex; mode=display">\theta_j=\theta_j+\alpha \sum_{i=1}^m \left( y^{(i)}-h_\theta(x^{(i)}) \right) x^{(i)}_j</script><p><strong><em>梯度上升过程的向量化</em></strong></p>
-<p>训练数据的矩阵形式如下，x的每一行为一个训练样本，每一列为不同的特征值。</p>
-<script type="math/tex; mode=display">x=\left[ 
-    \begin{matrix}
-        x^{(1)} \\
-        x^{(2)} \\
-        \vdots \\
-        x^{(m)}
-    \end{matrix} \right]=
-     \left[
-    \begin{matrix}
-    x_0^{(1)} & x_1^{(1)} & \cdots & x_n^{(1)} \\
-    x_0^{(2)} & x_1^{(2)} & \cdots & x_n^{(2)} \\
-    \vdots & \vdots & \vdots & \vdots \\
-    x_0^{(m)} & x_1^{(m)} & \cdots & x_n^{(m)} \\
-    \end{matrix} \right],
-    y=\left[ 
-    \begin{matrix}
-        y^{(1)} \\
-        y^{(2)} \\
-        \vdots \\
-        y^{(m)}
-    \end{matrix} \right]</script><p>参数向量$\theta$的矩阵形式为：</p>
-<script type="math/tex; mode=display">
-    \theta=\left[ 
-    \begin{matrix}
-        \theta_0 \\
-        \theta_1 \\
-        \vdots \\
-        \theta_n
-    \end{matrix} \right]</script><p>先求 $x\cdot\theta$并记结果为A:</p>
-<script type="math/tex; mode=display">
-    A=x\cdot\theta=\left[
-    \begin{matrix}
-    x_0^{(1)} & x_1^{(1)} & \cdots & x_n^{(1)} \\
-    x_0^{(2)} & x_1^{(2)} & \cdots & x_n^{(2)} \\
-    \vdots & \vdots & \vdots & \vdots \\
-    x_0^{(m)} & x_1^{(m)} & \cdots & x_n^{(m)} \\
-    \end{matrix} \right] \cdot 
-    \left[ 
-    \begin{matrix}
-        \theta_0 \\
-        \theta_1 \\
-        \vdots \\
-        \theta_n
-    \end{matrix} \right]=
-    \left[ 
-    \begin{matrix}
-        \theta_0 x_0^{(1)}+\theta_1 x_1^{(1)}+\cdots+\theta_n x_n^{(1)} \\
-        \theta_0 x_0^{(2)}+\theta_1 x_1^{(2)}+\cdots+\theta_n x_n^{(2)} \\
-        \vdots \\
-        \theta_0 x_0^{(m)}+\theta_1 x_1^{(m)}+\cdots+\theta_n x_n^{(m)} \\
-    \end{matrix} \right]</script><p>再求 $y-h_\theta(x)$ 并记结果为E:</p>
-<script type="math/tex; mode=display">
-E=y-h_\theta(x)=
-\left[ 
-    \begin{matrix}
-        g\left( A^{(1)} \right)-y^{(1)} \\
-        g\left( A^{(2)} \right)-y^{(2)} \\
-        \vdots \\
-        g\left( A^{(m)} \right)-y^{(m)}
-    \end{matrix} \right]=
-    \left[
-    \begin{matrix}
-        e^{(1)} \\
-        e^{(2)} \\
-        \vdots \\
-        e^{(m)}
-    \end{matrix} \right]=
-    g(A)-y</script><p>由以上式子可知，$y-h_\theta(x)$ 可由 $g(A)-y$ 一次求得，带入 $\theta$ 的更新过程可得：</p>
-<script type="math/tex; mode=display">
-\begin{align*} 
-\theta_j&=\theta_j+\alpha \sum_{i=1}^m \left( y^{(i)}-h_\theta(x^{(i)}) \right)x_j^{(i)} \\
-&= \theta_j+\alpha \sum_{i=1}^m e^{(i)} x^{(i)} \\
-&= \theta_j+\alpha \left( x_j^{(1)},x_j^{(2)}, \cdots,x_j^{(m)} \right) \cdot E
-\end{align*}</script><p>综合起来就是：</p>
-<script type="math/tex; mode=display">
-\left[
-    \begin{matrix}
-        \theta_0 \\
-        \theta_1 \\
-        \vdots \\
-        \theta_n \\
-    \end{matrix} \right]=
-    \left[
-    \begin{matrix}
-        \theta_0 \\
-        \theta_1 \\
-        \vdots \\
-        \theta_n \\
-    \end{matrix} \right]+\alpha \cdot
-    \left[
-    \begin{matrix}
-        x_0^{(1)}&,x_0^{(2)}&,\cdots&,x_0^{(m)} \\
-        x_1^{(1)}&,x_1^{(2)}&,\cdots&,x_1^{(m)} \\
-        \vdots&\vdots&\vdots&\vdots \\
-        x_n^{(1)}&,x_n^{(2)}&,\cdots&,x_n^{(m)}
-    \end{matrix} \right] \cdot E = \theta+\alpha \cdot x^T \cdot E</script><p><strong><em>Python代码如下:</em></strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 阶跃函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(inX)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1.0</span> / (<span class="number">1</span> + exp(-inX))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用梯度上升算法计算最佳回归系数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradientAscent</span><span class="params">(dataMatIn, classLabels)</span>:</span></span><br><span class="line">    <span class="comment"># 转换为Numpy矩阵类型</span></span><br><span class="line">    dataMatrix = mat(dataMatIn)</span><br><span class="line">    labelMat = mat(classLabels).T   <span class="comment"># 矩阵转置</span></span><br><span class="line">    m, n = shape(dataMatrix)</span><br><span class="line">    alpha = <span class="number">0.001</span>   <span class="comment"># 向目标移动的步长</span></span><br><span class="line">    numCycles = <span class="number">500</span> <span class="comment"># 迭代次数</span></span><br><span class="line">    weights = ones((n, <span class="number">1</span>))</span><br><span class="line">    <span class="comment"># 计算真实类别与预测类别的差值, 按照该差值的方向调整回归系数</span></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(numCycles):</span><br><span class="line">        h = sigmoid(dataMatrix * weights)   <span class="comment"># 矩阵相乘</span></span><br><span class="line">        error = (labelMat - h)  <span class="comment"># 向量相减</span></span><br><span class="line">        weights = weights + alpha * dataMatrix.T * error</span><br><span class="line">    <span class="keyword">return</span> weights</span><br></pre></td></tr></table></figure></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>《机器学习实战》中短短数十行代码中隐藏了太多的细节，如果不是查阅很多资料，对于初学者来说真的很难弄懂，以上过程还只是最简单的Logistic回归，书上还提供了随机Logistic回归和优化后的随机Logistic回归，看得也是云里雾里 -_-!</p>
-
+        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>最近在看《机器学习实战》，这本书将所有的算法都用 Python 代码实现了，非常具有实战性，但对于算法原理的讲解则比较粗略，也没有详细的数学推导过程，所以很多哪怕几行简单的代码，也得找资料理解好久。<br>
+        
+          <a class="article-more-a" href="/2018/04/23/logistic-regression/#more">more >></a>
+        
       
 
       
@@ -622,19 +461,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SVM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">支持向量机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">logistic回归</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">梯度上升算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">支持向量机</a>
               </li>
             
             <div class="clearfix"></div>
@@ -770,22 +609,6 @@ MathJax.Hub.Queue(function() {
     </div>
 
 </div>
-  </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>

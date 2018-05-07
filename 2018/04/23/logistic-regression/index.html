@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Logistic 回归与梯度上升算法 | Yech.site</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="引言最近在看《机器学习实战》，这本书将所有的算法都用 Python 代码实现了，非常具有实战性，但对于算法原理的讲解则比较粗略，也没有详细的数学推导过程，所以很多哪怕几行简单的代码，也得找资料理解好久。 Logistic 回归与梯度上升算法Logistic 回归 Logistic 回归用于二分类问题，根据现有数据对分类边界线建立回归公式，并以此进行分类。Logistic 回归本质上是一个基于条件概">
+  <meta name="description" content="引言最近在看《机器学习实战》，这本书将所有的算法都用 Python 代码实现了，非常具有实战性，但对于算法原理的讲解则比较粗略，也没有详细的数学推导过程，所以很多哪怕几行简单的代码，也得找资料理解好久。">
 <meta name="keywords" content="logistic回归,梯度上升算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Logistic 回归与梯度上升算法">
 <meta property="og:url" content="http://yoursite.com/2018/04/23/logistic-regression/index.html">
 <meta property="og:site_name" content="Yech.site">
-<meta property="og:description" content="引言最近在看《机器学习实战》，这本书将所有的算法都用 Python 代码实现了，非常具有实战性，但对于算法原理的讲解则比较粗略，也没有详细的数学推导过程，所以很多哪怕几行简单的代码，也得找资料理解好久。 Logistic 回归与梯度上升算法Logistic 回归 Logistic 回归用于二分类问题，根据现有数据对分类边界线建立回归公式，并以此进行分类。Logistic 回归本质上是一个基于条件概">
+<meta property="og:description" content="引言最近在看《机器学习实战》，这本书将所有的算法都用 Python 代码实现了，非常具有实战性，但对于算法原理的讲解则比较粗略，也没有详细的数学推导过程，所以很多哪怕几行简单的代码，也得找资料理解好久。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-23T13:30:58.666Z">
+<meta property="og:updated_time" content="2018-05-07T07:23:00.946Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Logistic 回归与梯度上升算法">
-<meta name="twitter:description" content="引言最近在看《机器学习实战》，这本书将所有的算法都用 Python 代码实现了，非常具有实战性，但对于算法原理的讲解则比较粗略，也没有详细的数学推导过程，所以很多哪怕几行简单的代码，也得找资料理解好久。 Logistic 回归与梯度上升算法Logistic 回归 Logistic 回归用于二分类问题，根据现有数据对分类边界线建立回归公式，并以此进行分类。Logistic 回归本质上是一个基于条件概">
+<meta name="twitter:description" content="引言最近在看《机器学习实战》，这本书将所有的算法都用 Python 代码实现了，非常具有实战性，但对于算法原理的讲解则比较粗略，也没有详细的数学推导过程，所以很多哪怕几行简单的代码，也得找资料理解好久。">
   
   
     <link rel="icon" href="/img/favicon.jpg">
@@ -185,7 +185,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>最近在看《机器学习实战》，这本书将所有的算法都用 Python 代码实现了，非常具有实战性，但对于算法原理的讲解则比较粗略，也没有详细的数学推导过程，所以很多哪怕几行简单的代码，也得找资料理解好久。</p>
+        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>最近在看《机器学习实战》，这本书将所有的算法都用 Python 代码实现了，非常具有实战性，但对于算法原理的讲解则比较粗略，也没有详细的数学推导过程，所以很多哪怕几行简单的代码，也得找资料理解好久。<br><a id="more"></a></p>
 <h3 id="Logistic-回归与梯度上升算法"><a href="#Logistic-回归与梯度上升算法" class="headerlink" title="Logistic 回归与梯度上升算法"></a>Logistic 回归与梯度上升算法</h3><p><strong><em>Logistic 回归</em></strong></p>
 <p>Logistic 回归用于二分类问题，根据现有数据对分类边界线建立回归公式，并以此进行分类。Logistic 回归本质上是一个基于条件概率的判别模型，利用了 Sigmoid 函数值域在(0, 1)之间的特性。Sigmoid 函数的计算公式为：</p>
 <script type="math/tex; mode=display">g(z)=\frac{1}{1+e^{-z}}</script><p>通过 Sigmid 函数计算出结果，若结果大于0.5，则为类别1，反之属于类别0。由于数据有多个特征，因此函数的输入用向量表示如下：</p>
@@ -582,19 +582,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SVM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">支持向量机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">logistic回归</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">梯度上升算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">支持向量机</a>
               </li>
             
             <div class="clearfix"></div>
@@ -730,22 +730,6 @@ MathJax.Hub.Queue(function() {
     </div>
 
 </div>
-  </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
