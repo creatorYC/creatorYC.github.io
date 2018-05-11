@@ -181,11 +181,13 @@
   	<time datetime="2018-04-23T05:49:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-23</time>
 </a>
         
+        
+            <span class="archive-article-date">
+              阅读量 <span id="busuanzi_value_page_pv"></span>
+            </span>
+        
       </header>
     
-    <span id="busuanzi_container_page_pv">
-      阅读量<span id="busuanzi_value_page_pv"></span>次
-    </span>
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>最近在看《机器学习实战》，这本书将所有的算法都用 Python 代码实现了，非常具有实战性，但对于算法原理的讲解则比较粗略，也没有详细的数学推导过程，所以很多哪怕几行简单的代码，也得找资料理解好久。<br><a id="more"></a></p>
@@ -477,22 +479,25 @@ E=y-h_\theta(x)=
           </div>
         </div>
       </div>
-      <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<footer id="footer">
+      <footer id="footer">
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
     		&copy; 2018 yechoor
     	</div>
-				<span id="busuanzi_container_site_uv"> 
-					本站访客数<span id="busuanzi_value_site_uv"></span>人次
-				</span>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
     </div>
+		<div calss="count-span">
+			<span id="busuanzi_container_site_uv">
+					总访客: <span id="busuanzi_value_site_uv"></span>
+			</span>
+	</div>
   </div>
 </footer>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
     </div>
     <script>
 	var yiliaConfig = {
@@ -589,19 +594,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SVM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">支持向量机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">logistic回归</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">梯度上升算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">支持向量机</a>
               </li>
             
             <div class="clearfix"></div>
@@ -737,6 +742,22 @@ MathJax.Hub.Queue(function() {
     </div>
 
 </div>
-  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>

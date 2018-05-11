@@ -181,11 +181,9 @@
   	<time datetime="2018-04-28T07:55:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-28</time>
 </a>
         
+        
       </header>
     
-    <span id="busuanzi_container_page_pv">
-      阅读量<span id="busuanzi_value_page_pv"></span>次
-    </span>
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>SVM — 支持向量机，它是一个二类分类器。在样本数据中，找出一个分割超平面(因为数据集有很多特征，所以是多维的，因此是个分割面)，分布在分割超平面两侧的数据属于不同的类别。为了找出最佳的分割超平面，需要满足一些条件，即<strong>离分割超平面距离最近的点的间隔尽可能大</strong>。而离分割超平面最近的那些点，就被称为<strong>支持向量</strong>。现在的目标就是求解这个最佳的分割超平面。<br>
@@ -275,11 +273,9 @@
   	<time datetime="2018-04-23T05:49:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-23</time>
 </a>
         
+        
       </header>
     
-    <span id="busuanzi_container_page_pv">
-      阅读量<span id="busuanzi_value_page_pv"></span>次
-    </span>
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>最近在看《机器学习实战》，这本书将所有的算法都用 Python 代码实现了，非常具有实战性，但对于算法原理的讲解则比较粗略，也没有详细的数学推导过程，所以很多哪怕几行简单的代码，也得找资料理解好久。<br>
@@ -359,22 +355,25 @@
           </div>
         </div>
       </div>
-      <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<footer id="footer">
+      <footer id="footer">
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
     		&copy; 2018 yechoor
     	</div>
-				<span id="busuanzi_container_site_uv"> 
-					本站访客数<span id="busuanzi_value_site_uv"></span>人次
-				</span>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
     </div>
+		<div calss="count-span">
+			<span id="busuanzi_container_site_uv">
+					总访客: <span id="busuanzi_value_site_uv"></span>
+			</span>
+	</div>
   </div>
 </footer>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
     </div>
     <script>
 	var yiliaConfig = {
@@ -471,19 +470,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SVM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">支持向量机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">logistic回归</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">梯度上升算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">支持向量机</a>
               </li>
             
             <div class="clearfix"></div>
@@ -619,6 +618,22 @@ MathJax.Hub.Queue(function() {
     </div>
 
 </div>
-  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
