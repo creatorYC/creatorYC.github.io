@@ -183,6 +183,9 @@
         
       </header>
     
+    <span id="busuanzi_container_page_pv">
+      阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>SVM — 支持向量机，它是一个二类分类器。在样本数据中，找出一个分割超平面(因为数据集有很多特征，所以是多维的，因此是个分割面)，分布在分割超平面两侧的数据属于不同的类别。为了找出最佳的分割超平面，需要满足一些条件，即<strong>离分割超平面距离最近的点的间隔尽可能大</strong>。而离分割超平面最近的那些点，就被称为<strong>支持向量</strong>。现在的目标就是求解这个最佳的分割超平面。<br><a id="more"></a></p>
@@ -387,12 +390,16 @@ L(\omega, b, \alpha) &= \frac{1}{2} \sum_{i,j=1}^n \alpha_i \alpha_j y_i y_j x_i
           </div>
         </div>
       </div>
-      <footer id="footer">
+      <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<footer id="footer">
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
     		&copy; 2018 yechoor
     	</div>
+				<span id="busuanzi_container_site_uv"> 
+					本站访客数<span id="busuanzi_value_site_uv"></span>人次
+				</span>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
@@ -495,19 +502,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">logistic回归</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">梯度上升算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SVM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">支持向量机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">logistic回归</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">梯度上升算法</a>
               </li>
             
             <div class="clearfix"></div>
