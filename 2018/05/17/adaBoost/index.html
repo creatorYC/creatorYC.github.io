@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 梯度上升算法 | Yech.site</title>
+  <title>adaBoost | Yech.site</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Yech - 一起">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yech.site">
-<meta property="og:url" content="http://yoursite.com/tags/梯度上升算法/index.html">
+  <meta name="description" content="引言AdaBoost, 是“Adaptive Boosting(自适应增强)”的缩写，它是一种迭代算法，其核心思想是针对同一个训练集训练不同的分类器(弱分类器)，然后把这些弱分类器集合起来，构成一个更强的最终分类器(强分类器)。 它的自适应性在于：前一个基本分类器分错的样本的权值在下一轮迭代时会上升，分对的样本的权值在下一轮迭代时会降低，加权后的全体样本再次被用来训练下一个基本分类器。每一轮迭代都">
+<meta name="keywords" content="AdaBoost">
+<meta property="og:type" content="article">
+<meta property="og:title" content="adaBoost">
+<meta property="og:url" content="http://yoursite.com/2018/05/17/adaBoost/index.html">
 <meta property="og:site_name" content="Yech.site">
-<meta property="og:description" content="Yech - 一起">
+<meta property="og:description" content="引言AdaBoost, 是“Adaptive Boosting(自适应增强)”的缩写，它是一种迭代算法，其核心思想是针对同一个训练集训练不同的分类器(弱分类器)，然后把这些弱分类器集合起来，构成一个更强的最终分类器(强分类器)。 它的自适应性在于：前一个基本分类器分错的样本的权值在下一轮迭代时会上升，分对的样本的权值在下一轮迭代时会降低，加权后的全体样本再次被用来训练下一个基本分类器。每一轮迭代都">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-17T09:11:42.544Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Yech.site">
-<meta name="twitter:description" content="Yech - 一起">
+<meta name="twitter:title" content="adaBoost">
+<meta name="twitter:description" content="引言AdaBoost, 是“Adaptive Boosting(自适应增强)”的缩写，它是一种迭代算法，其核心思想是针对同一个训练集训练不同的分类器(弱分类器)，然后把这些弱分类器集合起来，构成一个更强的最终分类器(强分类器)。 它的自适应性在于：前一个基本分类器分错的样本的权值在下一轮迭代时会上升，分对的样本的权值在下一轮迭代时会降低，加权后的全体样本再次被用来训练下一个基本分类器。每一轮迭代都">
   
   
     <link rel="icon" href="/img/favicon.jpg">
@@ -163,52 +165,91 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-adaBoost" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/23/logistic-regression/" class="archive-article-date">
-  	<time datetime="2018-04-23T05:49:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-23</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/23/logistic-regression/">Logistic 回归与梯度上升算法</a>
+    <h1 class="article-title" itemprop="name">
+      adaBoost
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/05/17/adaBoost/" class="archive-article-date">
+  	<time datetime="2018-05-17T08:01:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
+</a>
+        
+        
+            <span class="archive-article-date">
+              阅读量 <span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>AdaBoost, 是“Adaptive Boosting(自适应增强)”的缩写，它是一种迭代算法，其核心思想是针对同一个训练集训练不同的分类器(弱分类器)，然后把这些弱分类器集合起来，构成一个更强的最终分类器(强分类器)。 它的自适应性在于：前一个基本分类器分错的样本的权值在下一轮迭代时会上升，分对的样本的权值在下一轮迭代时会降低，加权后的全体样本再次被用来训练下一个基本分类器。每一轮迭代都会产生一个新的基本分类器，直到达到某个预定的足够小的错误率或达到预先指定的最大迭代次数。</p>
+<h3 id="AdaBoost-算法原理"><a href="#AdaBoost-算法原理" class="headerlink" title="AdaBoost 算法原理"></a>AdaBoost 算法原理</h3><p>AdaBoost 算法分为三步：</p>
+<ol>
+<li>初始化训练数据的权值分布。如果有 N 个样本，则最开始时每个样本的权值都相同，均为： $\frac{1}{N}$。</li>
+<li>训练弱分类器。训练过程中，如果某个样本点已经被正确的分类，那么在构造下一个训练集时它的权值就会降低，相反，如果某个样本点分类错误，则它的权值将会升高。然后，权值更新过的样本集被用于训练下一个分类器，整个训练过程如此迭代下去。</li>
+<li>将每次迭代训练得到的弱分类器组合成强分类器。各个弱分类器的训练过程结束后，加大分类误差率小的弱分类器的权值，使其在最终的分类函数中起较大的决定作用，减小分类误差率大的弱分类器的权值，使其在最终的分类函数中起较小的决定作用，即误差率低的弱分类器在最终的分类器中占较大的权重。</li>
+</ol>
+<h3 id="AdaBoost-算法流程"><a href="#AdaBoost-算法流程" class="headerlink" title="AdaBoost 算法流程"></a>AdaBoost 算法流程</h3><p>给定一个训练数据集 $ T={(x_1, y_1), (x_2, y_2), \cdots, (x_N, y_N)} $， 其中，$x \in \chi$，实例空间 $\chi \subset R^n$，$y_i \in {-1, +1}$，算法流程如下：</p>
+<ol>
+<li>首先，初始化训练数据的权值分布。每一个训练样本最开始都被赋予相等的权值：$\frac{1}{N}$<script type="math/tex; mode=display">D_1 = (w_{1,1}, w_{1,2}, \cdots, w_{1,i}, \cdots, w_{1,N}), w_{1,i} = \frac{1}{N}, i=1,2,\cdots,N</script></li>
+<li>进行多次迭代，用 $m = 1,2, \cdots, M$ 表示迭代的轮次。<ul>
+<li>使用具有权值分布$D_m$的训练集学习，得到基本分类器<strong><em>(选取让误差率最低的阈值来设计基本分类器)</em></strong>:<script type="math/tex; mode=display">G_m(x): x \rightarrow \{-1. +1\}</script></li>
+<li>计算 $G_m(x)$ 在训练数据集上的误差率，<script type="math/tex; mode=display">e_m = P(G_m(x_i) \neq y_i) = \sum_{G_m(x_i) \neq y_i} w_{mi}</script>由上述式子可知，$G_m(x)$在训练数据集上的<strong>误差率</strong> $e_m$ 就是被$G_m(x)$误分类样本的权值之和。</li>
+<li>计算 $G_m(x)$ 的系数，$\alpha_m$表示$G_m(x)$在最终的分类器中的重要程度，即得到基本分类器在最终分类器中的权重：<script type="math/tex; mode=display">\alpha_m = \frac{1}{2} \log \frac{1-e_m}{e_m}</script>由上述式子可知，$e_m \leq \frac{1}{2}$ 时，$\alpha_m \geq 0$，且 $\alpha_m$ 随着 $e_m$ 的减小而增大，意味着分类误差率越小的基本分类器在最终分类器中的作用越大。</li>
+<li>更新训练数据集的权值分布，得到样本新的权值分布，用于下一轮迭代：<script type="math/tex; mode=display">D_{m+1} = (w_{m+1,1}, \cdots, w_{m+1,i}, \cdots, w_{m+1, N}),</script><script type="math/tex; mode=display">w_{m+1,i} = \frac{w_{m,i}}{Z_m} exp(-\alpha_m y_i G_m(x_i)), i=1,2,\cdots,N</script>其中，$Z<em>m$ 是规范化因子，使得 $D</em>{m+1}$ 成为一个概率分布：<script type="math/tex; mode=display">Z_m = \sum_{i=1}^N w_{m,i} exp(-\alpha_m y_i G_m(x_i))</script>这样就使得被基本分类器$G_m(x)$误分类样本的权值增大，而被正确分类样本的权值减小。</li>
+</ul>
+</li>
+<li>组合各个弱分类器。<script type="math/tex; mode=display">f(x) = \sum_{m=1}^M \alpha_m G_m(x)</script>从而得到最终的分类器如下：<script type="math/tex; mode=display">G(x) = sign(f(x)) = sign \left( \sum_{m=1}^M \alpha_m G_m(x) \right)</script></li>
+</ol>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">logistic回归</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">梯度上升算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">AdaBoost</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -221,17 +262,104 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/05/17/adaBoost/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/04/28/SVM/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SVM 初探</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -261,9 +389,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
