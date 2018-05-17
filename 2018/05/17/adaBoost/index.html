@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Yech.site">
 <meta property="og:description" content="引言AdaBoost, 是“Adaptive Boosting(自适应增强)”的缩写，它是一种迭代算法，其核心思想是针对同一个训练集训练不同的分类器(弱分类器)，然后把这些弱分类器集合起来，构成一个更强的最终分类器(强分类器)。 它的自适应性在于：前一个基本分类器分错的样本的权值在下一轮迭代时会上升，分对的样本的权值在下一轮迭代时会降低，加权后的全体样本再次被用来训练下一个基本分类器。每一轮迭代都">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-17T09:11:42.544Z">
+<meta property="og:updated_time" content="2018-05-17T09:20:27.451Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="adaBoost">
 <meta name="twitter:description" content="引言AdaBoost, 是“Adaptive Boosting(自适应增强)”的缩写，它是一种迭代算法，其核心思想是针对同一个训练集训练不同的分类器(弱分类器)，然后把这些弱分类器集合起来，构成一个更强的最终分类器(强分类器)。 它的自适应性在于：前一个基本分类器分错的样本的权值在下一轮迭代时会上升，分对的样本的权值在下一轮迭代时会降低，加权后的全体样本再次被用来训练下一个基本分类器。每一轮迭代都">
@@ -190,7 +190,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>AdaBoost, 是“Adaptive Boosting(自适应增强)”的缩写，它是一种迭代算法，其核心思想是针对同一个训练集训练不同的分类器(弱分类器)，然后把这些弱分类器集合起来，构成一个更强的最终分类器(强分类器)。 它的自适应性在于：前一个基本分类器分错的样本的权值在下一轮迭代时会上升，分对的样本的权值在下一轮迭代时会降低，加权后的全体样本再次被用来训练下一个基本分类器。每一轮迭代都会产生一个新的基本分类器，直到达到某个预定的足够小的错误率或达到预先指定的最大迭代次数。</p>
+        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>AdaBoost, 是“Adaptive Boosting(自适应增强)”的缩写，它是一种迭代算法，其核心思想是针对同一个训练集训练不同的分类器(弱分类器)，然后把这些弱分类器集合起来，构成一个更强的最终分类器(强分类器)。 它的自适应性在于：前一个基本分类器分错的样本的权值在下一轮迭代时会上升，分对的样本的权值在下一轮迭代时会降低，加权后的全体样本再次被用来训练下一个基本分类器。每一轮迭代都会产生一个新的基本分类器，直到达到某个预定的足够小的错误率或达到预先指定的最大迭代次数。<br><a id="more"></a></p>
 <h3 id="AdaBoost-算法原理"><a href="#AdaBoost-算法原理" class="headerlink" title="AdaBoost 算法原理"></a>AdaBoost 算法原理</h3><p>AdaBoost 算法分为三步：</p>
 <ol>
 <li>初始化训练数据的权值分布。如果有 N 个样本，则最开始时每个样本的权值都相同，均为： $\frac{1}{N}$。</li>
@@ -632,6 +632,22 @@ MathJax.Hub.Queue(function() {
     </div>
 
 </div>
-  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>

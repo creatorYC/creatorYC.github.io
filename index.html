@@ -186,26 +186,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>AdaBoost, 是“Adaptive Boosting(自适应增强)”的缩写，它是一种迭代算法，其核心思想是针对同一个训练集训练不同的分类器(弱分类器)，然后把这些弱分类器集合起来，构成一个更强的最终分类器(强分类器)。 它的自适应性在于：前一个基本分类器分错的样本的权值在下一轮迭代时会上升，分对的样本的权值在下一轮迭代时会降低，加权后的全体样本再次被用来训练下一个基本分类器。每一轮迭代都会产生一个新的基本分类器，直到达到某个预定的足够小的错误率或达到预先指定的最大迭代次数。</p>
-<h3 id="AdaBoost-算法原理"><a href="#AdaBoost-算法原理" class="headerlink" title="AdaBoost 算法原理"></a>AdaBoost 算法原理</h3><p>AdaBoost 算法分为三步：</p>
-<ol>
-<li>初始化训练数据的权值分布。如果有 N 个样本，则最开始时每个样本的权值都相同，均为： $\frac{1}{N}$。</li>
-<li>训练弱分类器。训练过程中，如果某个样本点已经被正确的分类，那么在构造下一个训练集时它的权值就会降低，相反，如果某个样本点分类错误，则它的权值将会升高。然后，权值更新过的样本集被用于训练下一个分类器，整个训练过程如此迭代下去。</li>
-<li>将每次迭代训练得到的弱分类器组合成强分类器。各个弱分类器的训练过程结束后，加大分类误差率小的弱分类器的权值，使其在最终的分类函数中起较大的决定作用，减小分类误差率大的弱分类器的权值，使其在最终的分类函数中起较小的决定作用，即误差率低的弱分类器在最终的分类器中占较大的权重。</li>
-</ol>
-<h3 id="AdaBoost-算法流程"><a href="#AdaBoost-算法流程" class="headerlink" title="AdaBoost 算法流程"></a>AdaBoost 算法流程</h3><p>给定一个训练数据集 $ T={(x_1, y_1), (x_2, y_2), \cdots, (x_N, y_N)} $， 其中，$x \in \chi$，实例空间 $\chi \subset R^n$，$y_i \in {-1, +1}$，算法流程如下：</p>
-<ol>
-<li>首先，初始化训练数据的权值分布。每一个训练样本最开始都被赋予相等的权值：$\frac{1}{N}$<script type="math/tex; mode=display">D_1 = (w_{1,1}, w_{1,2}, \cdots, w_{1,i}, \cdots, w_{1,N}), w_{1,i} = \frac{1}{N}, i=1,2,\cdots,N</script></li>
-<li>进行多次迭代，用 $m = 1,2, \cdots, M$ 表示迭代的轮次。<ul>
-<li>使用具有权值分布$D_m$的训练集学习，得到基本分类器<strong><em>(选取让误差率最低的阈值来设计基本分类器)</em></strong>:<script type="math/tex; mode=display">G_m(x): x \rightarrow \{-1. +1\}</script></li>
-<li>计算 $G_m(x)$ 在训练数据集上的误差率，<script type="math/tex; mode=display">e_m = P(G_m(x_i) \neq y_i) = \sum_{G_m(x_i) \neq y_i} w_{mi}</script>由上述式子可知，$G_m(x)$在训练数据集上的<strong>误差率</strong> $e_m$ 就是被$G_m(x)$误分类样本的权值之和。</li>
-<li>计算 $G_m(x)$ 的系数，$\alpha_m$表示$G_m(x)$在最终的分类器中的重要程度，即得到基本分类器在最终分类器中的权重：<script type="math/tex; mode=display">\alpha_m = \frac{1}{2} \log \frac{1-e_m}{e_m}</script>由上述式子可知，$e_m \leq \frac{1}{2}$ 时，$\alpha_m \geq 0$，且 $\alpha_m$ 随着 $e_m$ 的减小而增大，意味着分类误差率越小的基本分类器在最终分类器中的作用越大。</li>
-<li>更新训练数据集的权值分布，得到样本新的权值分布，用于下一轮迭代：<script type="math/tex; mode=display">D_{m+1} = (w_{m+1,1}, \cdots, w_{m+1,i}, \cdots, w_{m+1, N}),</script><script type="math/tex; mode=display">w_{m+1,i} = \frac{w_{m,i}}{Z_m} exp(-\alpha_m y_i G_m(x_i)), i=1,2,\cdots,N</script>其中，$Z<em>m$ 是规范化因子，使得 $D</em>{m+1}$ 成为一个概率分布：<script type="math/tex; mode=display">Z_m = \sum_{i=1}^N w_{m,i} exp(-\alpha_m y_i G_m(x_i))</script>这样就使得被基本分类器$G_m(x)$误分类样本的权值增大，而被正确分类样本的权值减小。</li>
-</ul>
-</li>
-<li>组合各个弱分类器。<script type="math/tex; mode=display">f(x) = \sum_{m=1}^M \alpha_m G_m(x)</script>从而得到最终的分类器如下：<script type="math/tex; mode=display">G(x) = sign(f(x)) = sign \left( \sum_{m=1}^M \alpha_m G_m(x) \right)</script></li>
-</ol>
-
+        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>AdaBoost, 是“Adaptive Boosting(自适应增强)”的缩写，它是一种迭代算法，其核心思想是针对同一个训练集训练不同的分类器(弱分类器)，然后把这些弱分类器集合起来，构成一个更强的最终分类器(强分类器)。 它的自适应性在于：前一个基本分类器分错的样本的权值在下一轮迭代时会上升，分对的样本的权值在下一轮迭代时会降低，加权后的全体样本再次被用来训练下一个基本分类器。每一轮迭代都会产生一个新的基本分类器，直到达到某个预定的足够小的错误率或达到预先指定的最大迭代次数。<br>
+        
+          <a class="article-more-a" href="/2018/05/17/adaBoost/#more">more >></a>
+        
       
 
       
@@ -726,6 +710,22 @@ MathJax.Hub.Queue(function() {
     </div>
 
 </div>
-  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
